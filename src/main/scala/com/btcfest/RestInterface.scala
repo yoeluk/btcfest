@@ -27,14 +27,14 @@ trait RestApi extends HttpService with ActorLogging with BitcoinApiCreator { act
     path(Segment) { cmd => 
       get { requestContext =>
         val request = CMD(command = cmd, params = Nil: List[String], id = None)
-				val responder = createResponder(requestContext)
-				bitcoinApi.ask(request).pipeTo(responder)
+        val responder = createResponder(requestContext)
+        bitcoinApi.ask(request).pipeTo(responder)
       } ~
       post {
         entity(as[BtcParams]) { bp =>  requestContext =>
           val request = CMD(command = cmd, params = List(bp.params), id = bp.id)
-					val responder = createResponder(requestContext)
-					bitcoinApi.ask(request).pipeTo(responder)
+          val responder = createResponder(requestContext)
+          bitcoinApi.ask(request).pipeTo(responder)
         }
       }
     }
