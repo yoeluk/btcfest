@@ -1,16 +1,16 @@
-**Fault Tolerant Restful Api Servers**
+**Fault Tolerant and Distributed Restful Api Servers**
 
-A pair of [Akka](http://akka.io/) servers (backend & frontend servers) that leverages bitcoin core/deamon jsonrpc api.
+A pair of [Akka](http://akka.io/) servers (backend & frontend servers) that leverages bitcoin core/daemon jsonrpc api.
 
 The servers don't have to be in the same machine. They can be anywhere as long as they can communicate via tcp. The tcp settings can be adjusted in the ```src/main/resources/``` configuration files.
 
 In the ```bin``` directory you can find 2 jars that we built for demo purposes with the default configuration settings which enforces that the servers and the bitcoin jsonrpc api are running in the same machine.
 
-To run the servers first ensure that you have bitcoin core/deamon runing. Try this in a terminal window:
+To run the servers first ensure that you have bitcoin core/daemon runing. Try this in a terminal window:
 ```
 $ curl --user user:password --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method": "getinfo", "params": [] }' -H 'content-type: text/plain;' http://127.0.0.1:8332/
 ```
-Please note that you need to replace the user, password, interface and port in the cURL string above with the values you configured your bitcoin core/deamon. If all is good you should receive an appropriate json response.
+Please note that you need to replace the user, password, interface and port in the cURL string above with the values you configured your bitcoin core/daemon. If all is good you should receive an appropriate json response.
 
 For the reminder of this readme we are going to use [Httpie](https://pypi.python.org/pypi/httpie) for illustrating the interactions with the servers. *Please ensure that you have [Httpie](https://pypi.python.org/pypi/httpie) install in your system if you are going to run the following test or, ensure that you are using the correct cURL equivalent.*
 
