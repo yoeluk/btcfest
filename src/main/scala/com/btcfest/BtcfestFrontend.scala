@@ -13,13 +13,12 @@ object BtcfestFrontend extends App {
 
   val system = ActorSystem("frontend", config)
 
-  class FrontendRestInterface extends RestInterface
-                              with RemoteBitcoinApiCreator
+  class FrontendRestInterface extends RestInterface with RemoteBitcoinApiCreator
 
   val restInterface = system.actorOf(
-      props   =   Props[FrontendRestInterface],
-      name    =   "restInterface"
-    )
+     props   =   Props[FrontendRestInterface],
+     name    =   "restInterface"
+  )
 
   Http(system).manager ! Bind(
     listener    =   restInterface,
