@@ -4,7 +4,7 @@ A pair of [Akka](http://akka.io/) servers (backend & frontend servers) that leve
 
 The servers don't have to be in the same machine. They can be anywhere as long as they can communicate via tcp. The tcp settings can be adjusted in the ```src/main/resources/``` configuration files.
 
-In the ```bin``` directory you can find 2 jars that we built for demo purposes with the default configuration settings which enforces that the servers and the bitcoin jsonrpc api are running in the same machine.
+In the ```jars``` directory you can find 2 jars that we built for demo purposes with the default configuration settings which enforces that the servers and the bitcoin jsonrpc api are running in the same machine.
 
 To run the servers first ensure that you have bitcoin core/daemon runing. Try this in a terminal window:
 ```
