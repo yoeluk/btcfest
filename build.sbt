@@ -1,10 +1,15 @@
+import SonatypeKeys._
 import com.typesafe.sbt.SbtStartScript
 seq(SbtStartScript.startScriptForClassesSettings: _*)
 
-name := "btcfest"
-version := "1.0-SNAPSHOT"
+name         := "btcfest"
+version      := "0.1-SNAPSHOT"
+organization := "com.yoeluk"
+profileName  := "com.yoeluk"
+
 scalaVersion := "2.11.4"
 
+resolvers  += Classpaths.sbtPluginReleases
 resolvers ++= Seq(
   "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
   "Sonatype snapshots"  at "http://oss.sonatype.org/content/repositories/snapshots/",
@@ -31,20 +36,20 @@ libraryDependencies ++= {
   )
 }
 
-publishMavenStyle := true
-resolvers += Classpaths.sbtPluginReleases
-publishTo := {
+sonatypeSettings
+
+publishMavenStyle       := true
+publishArtifact in Test := false
+pomIncludeRepository    := { _ => false }
+publishTo               := {
   val nexus = "https://oss.sonatype.org/"
-  if (isSnapshot.value)
-    Some("snapshots" at nexus + "content/repositories/snapshots")
-  else
-    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+  if (isSnapshot.value) Some("snapshots" at nexus + "content/repositories/snapshots")
+  else Some("releases"  at nexus + "service/local/staging/deploy/maven2")
 }
 
 licenses := Seq(
   "Apache License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
 )
-
 homepage := Some(url("http://github.com/yoeluk/btcfest"))
 
 pomExtra := (
