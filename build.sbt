@@ -1,13 +1,16 @@
 import com.typesafe.sbt.SbtStartScript
 seq(SbtStartScript.startScriptForClassesSettings: _*)
+
 name := "btcfest"
-version := "1.0"
+version := "1.0-SNAPSHOT"
 scalaVersion := "2.11.4"
 
-resolvers ++= Seq("Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
+resolvers ++= Seq(
+  "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/",
   "Sonatype snapshots"  at "http://oss.sonatype.org/content/repositories/snapshots/",
   "Spray Repository"    at "http://repo.spray.io",
-  "Spray Nightlies"     at "http://nightlies.spray.io/")
+  "Spray Nightlies"     at "http://nightlies.spray.io/"
+)
 
 libraryDependencies ++= {
   val akkaVersion       = "2.3.4"
@@ -28,9 +31,40 @@ libraryDependencies ++= {
   )
 }
 
+publishMavenStyle := true
+resolvers += Classpaths.sbtPluginReleases
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+}
+
+licenses := Seq(
+  "Apache License, Version 2.0" -> url("http://www.apache.org/licenses/LICENSE-2.0")
+)
+
+homepage := Some(url("http://github.com/yoeluk/btcfest"))
+
+pomExtra := (
+  <developers>
+    <developer>
+      <id>yoeluk</id>
+      <name>Yoel Garcia</name>
+      <email>yoeluk@gmail.com</email>
+    </developer>
+  </developers>
+  <scm>
+    <connection>scm:git:git@github.com:yoeluk/btcfest.git</connection>
+    <url>scm:git:git@github.com:yoeluk/btcfest.git</url>
+    <developerConnection>scm:git:git@github.com:yoeluk/btcfest.git</developerConnection>
+  </scm>
+)
+
 test in assembly := {}
-mainClass in assembly := Some("com.btcfest.BtcfestBackend")
-assemblyJarName in assembly := "btcfest-backend.jar"
+//mainClass in assembly := Some("com.btcfest.BtcfestBackend")
+//assemblyJarName in assembly := "btcfest-backend.jar"
 
 //mainClass in assembly := Some("com.btcfest.BtcfestFrontend")
 //assemblyJarName in assembly := "btcfest-frontend.jar"

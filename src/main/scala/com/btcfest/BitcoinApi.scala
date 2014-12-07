@@ -49,10 +49,10 @@ class BitcoinApi extends Actor with ActorLogging {
         case p   => p.head
       }
       val payload = s"""|{
-                        | "jsonrpc": "1.0",
-                        | "id":"$reqId",
-                        | "method": "$method",
-                        | "params": $params
+                        | "jsonrpc" : "1.0",
+                        | "id"      : "$reqId",
+                        | "method"  : "$method",
+                        | "params"  : $params
                         |}""".stripMarginWithNewline("\n")
       
       val pipeline: HttpRequest => Future[BtcResponse] = (
